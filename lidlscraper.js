@@ -172,4 +172,117 @@ async function getMilkPrice() {
   }
 }
 
-getMilkPrice();
+async function getPastaPrice() {
+  try {
+    const siteUrl = "https://www.lidl.co.uk/our-products/food-cupboard/dried";
+
+    const { data } = await axios({ method: "GET", url: siteUrl });
+
+    const $ = cheerio.load(data);
+    let pastaObj = {};
+    let pastaArr = [];
+    const elemSelector = ".ret-o-card__link";
+
+    $(elemSelector).each((parentIdx, parentElem) => {
+      const linkStr = "https://www.lidl.co.uk";
+      if (parentIdx <= 2) {
+        const siteLink = linkStr + $(parentElem).attr("href");
+
+        const pictureLink = $(parentElem).find("img").attr("src");
+        let description = $(parentElem).find(".ret-o-card__content").text();
+        description = description.replace(/\s\s+/g, " ").trim();
+
+        let name = $(parentElem).find(".ret-o-card__headline").text();
+        name = name.replace(/\s\s+/g, " ").trim();
+
+        let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+        price = parseFloat(price.substring(1));
+
+        pastaObj = {
+          name,
+          description,
+          price,
+          siteLink,
+          pictureLink,
+          category: "pasta",
+          supermarket: "lidl",
+        };
+        pastaArr.push(pastaObj);
+      }
+    });
+    fs.readFile("./data/pasta.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      pastaArr.forEach((item) => {
+        parsedData.push(item);
+      });
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("./data/pasta.json", returnData, "utf-8").catch((err) => {
+        console.log("Could not write");
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getBreadPrice() {
+  try {
+    const siteUrl =
+      "https://www.lidl.co.uk/our-products/deluxe/deluxe-breakfast";
+
+    const { data } = await axios({ method: "GET", url: siteUrl });
+
+    const $ = cheerio.load(data);
+    let breadObj = {};
+    let breadArr = [];
+
+    const elemSelector = ".ret-o-card__link";
+    $(elemSelector).each((parentIdx, parentElem) => {
+      const linkStr = "https://www.lidl.co.uk";
+      if (parentIdx < 1) {
+        const siteLink = linkStr + $(parentElem).attr("href");
+
+        const pictureLink = $(parentElem).find("img").attr("src");
+
+        let description = $(parentElem).find(".ret-o-card__content").text();
+        description = description.replace(/\s\s+/g, " ").trim();
+
+        let name = $(parentElem).find(".ret-o-card__headline").text();
+        name = name.replace(/\s\s+/g, " ").trim();
+        name = name.substring(0, name.length - 2);
+
+        let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+        price = parseFloat(price.substring(1));
+
+        console.log(description, name, price);
+
+        breadObj = {
+          name,
+          description,
+          price,
+          siteLink,
+          pictureLink,
+          category: "bread",
+          supermarket: "lidl",
+        };
+        breadArr.push(breadObj);
+      }
+    });
+    fs.readFile("./data/bread.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      breadArr.forEach((item) => {
+        parsedData.push(item);
+      });
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("./data/bread.json", returnData, "utf-8").catch((err) => {
+        console.log("Could not write");
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getBreadPrice();

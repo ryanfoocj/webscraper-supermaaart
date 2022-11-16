@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Baresa Fusilli",
+    "description": "1kg",
+    "price": 1.19,
+    "siteLink": "https://www.lidl.co.uk/p/dried/baresa-fusilli/p6333",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/27326/xs/27326_01.jpg",
+    "category": "pasta",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Baresa Penne Rigate",
+    "description": "500g",
+    "price": 0.69,
+    "siteLink": "https://www.lidl.co.uk/p/dried/baresa-penne-rigate/p6334",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/19089/xs/19089_99.jpg",
+    "category": "pasta",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Baresa Spaghetti",
+    "description": "500g",
+    "price": 0.69,
+    "siteLink": "https://www.lidl.co.uk/p/dried/baresa-spaghetti/p6339",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/38954/xs/38954_01.jpg",
+    "category": "pasta",
+    "supermarket": "lidl"
+  }
+]
