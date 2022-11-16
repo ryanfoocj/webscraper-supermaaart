@@ -115,4 +115,61 @@ async function getEggsPrice() {
   }
 }
 
-getEggsPrice();
+async function getMilkPrice() {
+  try {
+    const siteUrl = "https://www.lidl.co.uk/c/aberdoyle-dairies/c61";
+
+    const { data } = await axios({ method: "GET", url: siteUrl });
+
+    const $ = cheerio.load(data);
+    let milkObj = {};
+    let milkArr = [];
+    const elemSelector =
+      "#pageMain > div > div.nuc-a-wrapper > div > div > div > div > div";
+
+    $(elemSelector).each((parentIdx, parentElem) => {
+      if (parentIdx <= 2) {
+        const linkStr = "https://www.lidl.co.uk";
+        const siteLink = linkStr + $(parentElem).find("a").attr("href");
+
+        const pictureLink = $(parentElem).find("img").attr("src");
+
+        let description = $(parentElem).find(".ret-o-card__content").text();
+        description = description.replace(/\s\s+/g, " ").trim();
+
+        let name = $(parentElem).find(".ret-o-card__headline").text();
+        name = name.replace(/\s\s+/g, " ").trim();
+        name = name.substring(0, name.length - 2);
+
+        let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+        price = parseFloat(price.substring(1));
+
+        milkObj = {
+          name,
+          description,
+          price,
+          siteLink,
+          pictureLink,
+          category: "milk",
+          supermarket: "lidl",
+        };
+        milkArr.push(milkObj);
+      }
+    });
+    fs.readFile("./data/milk.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      milkArr.forEach((item) => {
+        parsedData.push(item);
+      });
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("./data/milk.json", returnData, "utf-8").catch((err) => {
+        console.log("Could not write");
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getMilkPrice();
