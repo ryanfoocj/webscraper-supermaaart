@@ -41,6 +41,7 @@ async function getToiletRollPrice() {
         siteLink,
         pictureLink,
         category: "toiletroll",
+        supermarket: "lidl",
       };
       itemArr.push(itemObj);
     });
@@ -62,6 +63,56 @@ async function getToiletRollPrice() {
   }
 }
 
-async function getBreadPrice() {}
+async function getEggsPrice() {
+  try {
+    const siteUrl = "https://www.lidl.co.uk/our-products/eggs";
 
-getToiletRollPrice();
+    const { data } = await axios({ method: "GET", url: siteUrl });
+
+    const $ = cheerio.load(data);
+    let eggsObj = {};
+    let eggsArr = [];
+
+    $(".ret-o-card").each((parentIdx, parentElem) => {
+      const linkStr = "https://www.lidl.co.uk";
+      const siteLink = linkStr + $(parentElem).children("a").attr("href");
+
+      const pictureLink = $(parentElem).find("img").attr("src");
+
+      let description = $(parentElem).find(".ret-o-card__content").text();
+      description = description.replace(/\s\s+/g, " ").trim();
+
+      let name = $(parentElem).find(".ret-o-card__headline").text();
+      name = name.replace(/\s\s+/g, " ").trim();
+
+      let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+      price = parseFloat(price.substring(1));
+
+      eggsObj = {
+        name,
+        description,
+        price,
+        siteLink,
+        pictureLink,
+        category: "eggs",
+        supermarket: "lidl",
+      };
+      eggsArr.push(eggsObj);
+    });
+    fs.readFile("./data/eggs.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      eggsArr.forEach((item) => {
+        parsedData.push(item);
+      });
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("./data/eggs.json", returnData, "utf-8").catch((err) => {
+        console.log("Could not write");
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getEggsPrice();
