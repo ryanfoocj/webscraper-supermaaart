@@ -5,7 +5,7 @@ const fs = require("fs/promises");
 
 async function getBreadPrice() {
   try {
-    const siteUrl = 
+    const siteUrl = "";
   } catch (err) {
     console.log(err);
   }
