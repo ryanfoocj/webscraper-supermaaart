@@ -1,6 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
+const fs = require("fs/promises");
 
 async function getToiletRollPrice() {
   try {
@@ -17,6 +18,7 @@ async function getToiletRollPrice() {
       "#pageMain > div > div.nuc-a-wrapper > div > div > div > div > div > article ";
 
     let itemObj = {};
+    let itemArr = [];
 
     $(elemSelector).each((parentIdx, parentElem) => {
       const linkStr = "https://www.lidl.co.uk/";
@@ -30,6 +32,8 @@ async function getToiletRollPrice() {
       description = description.replace(/\s\s+/g, " ").trim();
 
       let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+      price = parseFloat(price.substring(1));
+
       itemObj = {
         name,
         description,
@@ -38,7 +42,20 @@ async function getToiletRollPrice() {
         pictureLink,
         category: "toiletroll",
       };
-      console.log(itemObj);
+      itemArr.push(itemObj);
+    });
+    fs.readFile("./data/toiletroll.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      itemArr.forEach((item) => {
+        parsedData.push(item);
+      });
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("./data/toiletroll.json", returnData, "utf-8").catch(
+        (err) => {
+          console.log("Could not write");
+        }
+      );
     });
   } catch (err) {
     console.log(err);
