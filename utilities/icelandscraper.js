@@ -50,7 +50,7 @@ async function getBreadPrice() {
       breadArr.forEach((bread) => {
         parsedData.push(bread);
       });
-      console.log(parsedData);
+
       const returnData = JSON.stringify(parsedData);
 
       fs.writeFile("../data/bread.json", returnData, "utf-8").catch((err) => {
@@ -62,4 +62,63 @@ async function getBreadPrice() {
   }
 }
 
-getBreadPrice();
+async function getToiletRollPrice() {
+  try {
+    const siteUrl =
+      "https://www.iceland.co.uk/household/toilet-roll-kitchen-roll-and-tissues?pmin=0.01&prefn1=filterType&prefv1=Toilet%20Roll&srule=price-low-to-high&start=0&sz=25";
+
+    const { data } = await axios({
+      method: "GET",
+      url: siteUrl,
+    });
+
+    const $ = cheerio.load(data);
+    const elemSelector = "#primary > div.search-result-content > ul > li";
+    let toiletRollObj = {};
+    let toiletRollArr = [];
+
+    $(elemSelector).each((parentIdx, parentElem) => {
+      if (parentIdx <= 4) {
+        const siteLink = $(parentElem).find(".thumb-link").attr("href");
+        const pictureLink = $(parentElem).find("img").attr("data-src");
+        const name = $(parentElem).find(".name-link").children("span").text();
+        let price = $(parentElem)
+          .find(".product-sales-price")
+          .children("span")
+          .text();
+        price = price.substring(1);
+
+        const description = "";
+        toiletRollObj = {
+          name,
+          description,
+          price,
+          siteLink,
+          pictureLink,
+          category: "toiletroll",
+          supermarket: "iceland",
+        };
+        toiletRollArr.push(toiletRollObj);
+      }
+    });
+
+    fs.readFile("../data/toiletroll.json").then((data) => {
+      const parsedData = JSON.parse(data);
+      toiletRollArr.forEach((roll) => {
+        parsedData.push(roll);
+      });
+
+      const returnData = JSON.stringify(parsedData);
+
+      fs.writeFile("../data/toiletroll.json", returnData, "utf-8").catch(
+        (err) => {
+          console.log(err);
+        }
+      );
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getToiletRollPrice();

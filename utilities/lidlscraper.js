@@ -257,4 +257,4 @@ async function getBreadPrice() {
   }
 }
 
-getPastaPrice();
+getToiletRollPrice();
