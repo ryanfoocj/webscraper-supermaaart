@@ -2,6 +2,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
 const fs = require("fs/promises");
+const moment = require("moment");
 
 async function getToiletRollPrice() {
   try {
@@ -21,37 +22,43 @@ async function getToiletRollPrice() {
     let itemArr = [];
 
     $(elemSelector).each((parentIdx, parentElem) => {
-      const linkStr = "https://www.lidl.co.uk/";
-      const siteLink = linkStr + $(parentElem).children("a").attr("href");
+      if (parentIdx <= 4) {
+        const linkStr = "https://www.lidl.co.uk/";
+        const siteLink = linkStr + $(parentElem).children("a").attr("href");
 
-      const pictureLink = $(parentElem).find("img").attr("src");
-      let name = $(parentElem).find("h3").text();
-      name = name.replace(/\s\s+/g, " ").trim();
+        const pictureLink = $(parentElem).find("img").attr("src");
+        let name = $(parentElem).find("h3").text();
+        name = name.replace(/\s\s+/g, " ").trim();
 
-      let description = $(parentElem).find(".ret-o-card__content").text();
-      description = description.replace(/\s\s+/g, " ").trim();
+        let description = $(parentElem).find(".ret-o-card__content").text();
+        description = description.replace(/\s\s+/g, " ").trim();
 
-      let price = $(parentElem).find(".lidl-m-pricebox__price").text();
-      price = parseFloat(price.substring(1));
+        let price = $(parentElem).find(".lidl-m-pricebox__price").text();
+        price = parseFloat(price.substring(1));
 
-      itemObj = {
-        name,
-        description,
-        price,
-        siteLink,
-        pictureLink,
-        category: "toiletroll",
-        supermarket: "lidl",
-      };
-      itemArr.push(itemObj);
+        itemObj = {
+          name,
+          description,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
+          siteLink,
+          pictureLink,
+          category: "toiletroll",
+          supermarket: "lidl",
+        };
+        itemArr.push(itemObj);
+      }
     });
     const returnData = JSON.stringify(itemArr);
 
-    fs.writeFile("../data/toiletroll.json", returnData, "utf-8").catch(
-      (err) => {
+    fs.writeFile("../data/toiletroll.json", returnData, "utf-8")
+      .then(() => {
+        console.log("ToiletRoll JSON updated (Lidl)");
+      })
+      .catch((err) => {
         console.log("Could not write");
-      }
-    );
+      });
   } catch (err) {
     console.log(err);
   }
@@ -96,9 +103,13 @@ async function getEggsPrice() {
 
     const returnData = JSON.stringify(eggsArr);
 
-    fs.writeFile("../data/eggs.json", returnData, "utf-8").catch((err) => {
-      console.log("Could not write");
-    });
+    fs.writeFile("../data/eggs.json", returnData, "utf-8")
+      .then(() => {
+        console.log("Eggs JSON updated (Lidl)");
+      })
+      .catch((err) => {
+        console.log("Could not write");
+      });
   } catch (err) {
     console.log(err);
   }
@@ -148,9 +159,13 @@ async function getMilkPrice() {
 
     const returnData = JSON.stringify(milkArr);
 
-    fs.writeFile("../data/milk.json", returnData, "utf-8").catch((err) => {
-      console.log("Could not write");
-    });
+    fs.writeFile("../data/milk.json", returnData, "utf-8")
+      .then(() => {
+        console.log("Milk JSON updated (Lidl)");
+      })
+      .catch((err) => {
+        console.log("Could not write");
+      });
   } catch (err) {
     console.log(err);
   }
@@ -197,9 +212,13 @@ async function getPastaPrice() {
 
     const returnData = JSON.stringify(pastaArr);
 
-    fs.writeFile("../data/pasta.json", returnData, "utf-8").catch((err) => {
-      console.log("Could not write");
-    });
+    fs.writeFile("../data/pasta.json", returnData, "utf-8")
+      .then(() => {
+        console.log("Pasta JSON updated (Lidl)");
+      })
+      .catch((err) => {
+        console.log("Could not write");
+      });
   } catch (err) {
     console.log(err);
   }
@@ -249,12 +268,20 @@ async function getBreadPrice() {
 
     const returnData = JSON.stringify(breadArr);
 
-    fs.writeFile("../data/bread.json", returnData, "utf-8").catch((err) => {
-      console.log("Could not write");
-    });
+    fs.writeFile("../data/bread.json", returnData, "utf-8")
+      .then(() => {
+        console.log("Bread JSON updated (Lidl)");
+      })
+      .catch((err) => {
+        console.log("Could not write");
+      });
   } catch (err) {
     console.log(err);
   }
 }
 
 getToiletRollPrice();
+getBreadPrice();
+getEggsPrice();
+getMilkPrice();
+getPastaPrice();
