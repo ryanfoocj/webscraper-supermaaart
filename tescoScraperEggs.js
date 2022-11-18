@@ -1,5 +1,6 @@
 const express = require('express')
 const { Builder, By } = require('selenium-webdriver');
+const moment = require("moment");
 
 const app = express()
 const port = 3000
@@ -74,7 +75,8 @@ async function getElements(elements) {
             elementDetails.push({
                 name: name ?? '',
                 description: description ??'',
-                price: price ??'',
+                priceHistory: [
+                    { updateDate: moment().format("MMM Do[|]hh:mma"), price: price }, ],
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
                 category: "eggs",
