@@ -11,8 +11,8 @@ async function sender(data) {
   try {
     await client.connect();
 
-    const db = client.db("supermarkettest");
-    const coll = db.collection("pro");
+    const db = client.db("scrapedtest");
+    const coll = db.collection("products");
 
     data.map((product) => {
       coll.updateOne(
