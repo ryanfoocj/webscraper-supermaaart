@@ -1,1 +1,74 @@
-[{"name":"Aberdoyle Dairies Scottish Semi Skimmed Milk","description":"2.272L","price":1.55,"siteLink":"https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-semi-skimmed-milk/p16674","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208597/xs/5208597_01.jpg","category":"milk","supermarket":"lidl"},{"name":"Aberdoyle Dairies Scottish Whole Milk","description":"2.272L","price":1.55,"siteLink":"https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-whole-milk/p16723","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208594/xs/5208594_01.jpg","category":"milk","supermarket":"lidl"},{"name":"Aberdoyle Dairies Scottish Skimmed Milk","description":"2.272L","price":1.55,"siteLink":"https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-skimmed-milk/p16724","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208600/xs/5208600_01.jpg","category":"milk","supermarket":"lidl"}]
+[
+  {
+    "name": "Aberdoyle Dairies Scottish Semi Skimmed Milk",
+    "description": "2.272L",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.55 }],
+    "siteLink": "https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-semi-skimmed-milk/p16674",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208597/xs/5208597_01.jpg",
+    "category": "milk",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Aberdoyle Dairies Scottish Whole Milk",
+    "description": "2.272L",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.55 }],
+    "siteLink": "https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-whole-milk/p16723",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208594/xs/5208594_01.jpg",
+    "category": "milk",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Aberdoyle Dairies Scottish Skimmed Milk",
+    "description": "2.272L",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.55 }],
+    "siteLink": "https://www.lidl.co.uk/p/aberdoyle-dairies/aberdoyle-dairies-scottish-skimmed-milk/p16724",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5208600/xs/5208600_01.jpg",
+    "category": "milk",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Dale Farm Fresh Buttermilk 1 Pint/568ml",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|01:32pm", "price": "0.60" }],
+    "siteLink": "https://www.iceland.co.uk/p/dale-farm-fresh-buttermilk-1-pint%2F568ml/7035.html",
+    "pictureLink": "https://assets.iceland.co.uk/i/iceland/dale_farm_fresh_buttermilk_1_pint568ml_7035_T1.jpg?$producttile$",
+    "category": "milk",
+    "supermarket": "iceland"
+  },
+  {
+    "name": "Dale Farm Fresh Whole Milk 1 Pint/568ml",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|01:32pm", "price": "0.60" }],
+    "siteLink": "https://www.iceland.co.uk/p/dale-farm-fresh-whole-milk-1-pint%2F568ml/31139.html",
+    "pictureLink": "https://assets.iceland.co.uk/i/iceland/dale_farm_fresh_whole_milk_1_pint568ml_31139_T1.jpg?$producttile$",
+    "category": "milk",
+    "supermarket": "iceland"
+  },
+  {
+    "name": "Dale Farm Fresh Skimmed Milk 1 Pint/568ml",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|01:32pm", "price": "0.69" }],
+    "siteLink": "https://www.iceland.co.uk/p/dale-farm-fresh-skimmed-milk-1-pint%2F568ml/30689.html",
+    "pictureLink": "https://assets.iceland.co.uk/i/iceland/dale_farm_fresh_skimmed_milk_1_pint568ml_30689_T1.jpg?$producttile$",
+    "category": "milk",
+    "supermarket": "iceland"
+  },
+  {
+    "name": "Dale Farm Fresh Semi-Skimmed Milk 1 Pint/568ml",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|01:32pm", "price": "0.69" }],
+    "siteLink": "https://www.iceland.co.uk/p/dale-farm-fresh-semi-skimmed-milk-1-pint%2F568ml/30690.html",
+    "pictureLink": "https://assets.iceland.co.uk/i/iceland/dale_farm_fresh_semi_skimmed_milk_1_pint568ml_30690_T1.jpg?$producttile$",
+    "category": "milk",
+    "supermarket": "iceland"
+  },
+  {
+    "name": "Dale Farm Fresh Semi-Skimmed Milk 1 Litre/ 1.76 Pints",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|01:32pm", "price": "0.90" }],
+    "siteLink": "https://www.iceland.co.uk/p/dale-farm-fresh-semi-skimmed-milk-1-litre%2F-1.76-pints/8172.html",
+    "pictureLink": "https://assets.iceland.co.uk/i/iceland/Dale_Farm_1LTR_Semi_Skimmed_Milk_8172.jpg?$producttile$",
+    "category": "milk",
+    "supermarket": "iceland"
+  }
+]

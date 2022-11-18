@@ -1,1 +1,56 @@
-[{"name":"Woodcote 6 Organic Eggs","description":"","price":1.99,"siteLink":"https://www.lidl.co.uk/p/eggs/woodcote-6-organic-eggs/p6730","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5204282/xs/5204282_86.jpg","category":"eggs","supermarket":"lidl"},{"name":"Woodcote 12 Large Free Range Eggs","description":"12 eggs","price":2.19,"siteLink":"https://www.lidl.co.uk/p/eggs/woodcote-12-large-free-range-eggs/p6729","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5201556/xs/5201556_88.jpg","category":"eggs","supermarket":"lidl"},{"name":"Woodcote 6 Large Free Range Eggs","description":"6 eggs","price":1.49,"siteLink":"https://www.lidl.co.uk/p/eggs/woodcote-6-large-free-range-eggs/p6728","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/08311/xs/08311_87.jpg","category":"eggs","supermarket":"lidl"},{"name":"Woodcote 6 Medium Free Range British Eggs","description":"6 eggs","price":1.09,"siteLink":"https://www.lidl.co.uk/p/eggs/woodcote-6-medium-free-range-british-eggs/p6726","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/01309/xs/01309_66.jpg","category":"eggs","supermarket":"lidl"},{"name":"Simply 15 Eggs","description":"15 eggs","price":1.59,"siteLink":"https://www.lidl.co.uk/p/eggs/simply-15-eggs/p6722","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5202337/xs/5202337_66.jpg","category":"eggs","supermarket":"lidl"},{"name":"Woodcote 10 Large Eggs","description":"10 eggs","price":1.59,"siteLink":"https://www.lidl.co.uk/p/eggs/woodcote-10-large-eggs/p6725","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/09801/xs/09801_76.jpg","category":"eggs","supermarket":"lidl"}]
+[
+  {
+    "name": "Woodcote 6 Organic Eggs",
+    "description": "",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.99 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/woodcote-6-organic-eggs/p6730",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5204282/xs/5204282_86.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Woodcote 12 Large Free Range Eggs",
+    "description": "12 eggs",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 2.19 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/woodcote-12-large-free-range-eggs/p6729",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5201556/xs/5201556_88.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Woodcote 6 Large Free Range Eggs",
+    "description": "6 eggs",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.49 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/woodcote-6-large-free-range-eggs/p6728",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/08311/xs/08311_87.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Woodcote 6 Medium Free Range British Eggs",
+    "description": "6 eggs",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.09 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/woodcote-6-medium-free-range-british-eggs/p6726",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/01309/xs/01309_66.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Simply 15 Eggs",
+    "description": "15 eggs",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.59 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/simply-15-eggs/p6722",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5202337/xs/5202337_66.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  },
+  {
+    "name": "Woodcote 10 Large Eggs",
+    "description": "10 eggs",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 1.59 }],
+    "siteLink": "https://www.lidl.co.uk/p/eggs/woodcote-10-large-eggs/p6725",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/09801/xs/09801_76.jpg",
+    "category": "eggs",
+    "supermarket": "lidl"
+  }
+]

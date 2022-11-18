@@ -3,6 +3,8 @@ const cheerio = require("cheerio");
 const express = require("express");
 const fs = require("fs/promises");
 const moment = require("moment");
+const { MongoClient } = require("mongodb");
+const sender = require("./sender");
 
 async function getToiletRollPrice() {
   try {
@@ -18,8 +20,8 @@ async function getToiletRollPrice() {
     const elemSelector =
       "#pageMain > div > div.nuc-a-wrapper > div > div > div > div > div > article ";
 
-    let itemObj = {};
-    let itemArr = [];
+    let toiletRollObj = {};
+    let toiletRollArr = [];
 
     $(elemSelector).each((parentIdx, parentElem) => {
       if (parentIdx <= 4) {
@@ -36,7 +38,7 @@ async function getToiletRollPrice() {
         let price = $(parentElem).find(".lidl-m-pricebox__price").text();
         price = parseFloat(price.substring(1));
 
-        itemObj = {
+        toiletRollObj = {
           name,
           description,
           priceHistory: [
@@ -47,18 +49,13 @@ async function getToiletRollPrice() {
           category: "toiletroll",
           supermarket: "lidl",
         };
-        itemArr.push(itemObj);
+        toiletRollArr.push(toiletRollObj);
       }
     });
-    const returnData = JSON.stringify(itemArr);
 
-    fs.writeFile("../data/toiletroll.json", returnData, "utf-8")
-      .then(() => {
-        console.log("ToiletRoll JSON updated (Lidl)");
-      })
-      .catch((err) => {
-        console.log("Could not write");
-      });
+    await sender(toiletRollArr).then(() => {
+      console.log("Toilet Rolls updated");
+    });
   } catch (err) {
     console.log(err);
   }
@@ -92,7 +89,9 @@ async function getEggsPrice() {
       eggsObj = {
         name,
         description,
-        price,
+        priceHistory: [
+          { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+        ],
         siteLink,
         pictureLink,
         category: "eggs",
@@ -101,15 +100,9 @@ async function getEggsPrice() {
       eggsArr.push(eggsObj);
     });
 
-    const returnData = JSON.stringify(eggsArr);
-
-    fs.writeFile("../data/eggs.json", returnData, "utf-8")
-      .then(() => {
-        console.log("Eggs JSON updated (Lidl)");
-      })
-      .catch((err) => {
-        console.log("Could not write");
-      });
+    await sender(eggsArr).then(() => {
+      console.log("Eggs updated");
+    });
   } catch (err) {
     console.log(err);
   }
@@ -147,7 +140,9 @@ async function getMilkPrice() {
         milkObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "milk",
@@ -157,15 +152,9 @@ async function getMilkPrice() {
       }
     });
 
-    const returnData = JSON.stringify(milkArr);
-
-    fs.writeFile("../data/milk.json", returnData, "utf-8")
-      .then(() => {
-        console.log("Milk JSON updated (Lidl)");
-      })
-      .catch((err) => {
-        console.log("Could not write");
-      });
+    await sender(milkArr).then(() => {
+      console.log("Milk updated");
+    });
   } catch (err) {
     console.log(err);
   }
@@ -200,7 +189,9 @@ async function getPastaPrice() {
         pastaObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "pasta",
@@ -210,21 +201,15 @@ async function getPastaPrice() {
       }
     });
 
-    const returnData = JSON.stringify(pastaArr);
-
-    fs.writeFile("../data/pasta.json", returnData, "utf-8")
-      .then(() => {
-        console.log("Pasta JSON updated (Lidl)");
-      })
-      .catch((err) => {
-        console.log("Could not write");
-      });
+    await sender(pastaArr).then(() => {
+      console.log("Pasta updated");
+    });
   } catch (err) {
     console.log(err);
   }
 }
 
-async function getBreadPrice() {
+/* async function getBreadPrice() {
   try {
     const siteUrl =
       "https://www.lidl.co.uk/our-products/deluxe/deluxe-breakfast";
@@ -256,7 +241,9 @@ async function getBreadPrice() {
         breadObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "bread",
@@ -266,22 +253,16 @@ async function getBreadPrice() {
       }
     });
 
-    const returnData = JSON.stringify(breadArr);
-
-    fs.writeFile("../data/bread.json", returnData, "utf-8")
-      .then(() => {
-        console.log("Bread JSON updated (Lidl)");
-      })
-      .catch((err) => {
-        console.log("Could not write");
-      });
+    await sender(breadArr).then(() => {
+      console.log("Bread updated");
+    });
   } catch (err) {
     console.log(err);
   }
-}
+} */
 
 getToiletRollPrice();
-getBreadPrice();
 getEggsPrice();
 getMilkPrice();
 getPastaPrice();
+//getBreadPrice();
