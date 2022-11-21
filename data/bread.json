@@ -1,1 +1,11 @@
-[{"name":"Deluxe Multigrain Farmhouse Loaf","description":"800g","price":0.89,"siteLink":"https://www.lidl.co.uk/p/deluxe-breakfast/deluxe-multigrain-farmhouse-loaf/p16080","pictureLink":"https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5204903/xs/5204903_44.jpg","category":"bread","supermarket":"lidl"}]
+[
+  {
+    "name": "Deluxe Multigrain Farmhouse Loaf",
+    "description": "800g",
+    "priceHistory": [{ "updateDate": "Nov 18th|11:38am", "price": 0.89 }],
+    "siteLink": "https://www.lidl.co.uk/p/deluxe-breakfast/deluxe-multigrain-farmhouse-loaf/p16080",
+    "pictureLink": "https://uk.cat-ret.assets.lidl/catalog5media/uk/article/5204903/xs/5204903_44.jpg",
+    "category": "bread",
+    "supermarket": "lidl"
+  }
+]

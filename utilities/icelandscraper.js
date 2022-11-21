@@ -2,6 +2,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
 const fs = require("fs/promises");
+const moment = require("moment");
+const sender = require("./sender");
 
 async function getBreadPrice() {
   try {
@@ -35,7 +37,9 @@ async function getBreadPrice() {
         breadObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "bread",
@@ -44,22 +48,8 @@ async function getBreadPrice() {
         breadArr.push(breadObj);
       }
     });
-
-    fs.readFile("../data/bread.json").then((data) => {
-      const parsedData = JSON.parse(data);
-      breadArr.forEach((bread) => {
-        parsedData.push(bread);
-      });
-
-      const returnData = JSON.stringify(parsedData);
-
-      fs.writeFile("../data/bread.json", returnData, "utf-8")
-        .then(() => {
-          console.log("Bread JSON updated (Iceland)");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await sender(breadArr).then(() => {
+      console.log("Bread updated (Iceland)");
     });
   } catch (err) {
     console.log(err);
@@ -96,7 +86,9 @@ async function getToiletRollPrice() {
         toiletRollObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "toiletroll",
@@ -105,22 +97,8 @@ async function getToiletRollPrice() {
         toiletRollArr.push(toiletRollObj);
       }
     });
-
-    fs.readFile("../data/toiletroll.json").then((data) => {
-      const parsedData = JSON.parse(data);
-      toiletRollArr.forEach((roll) => {
-        parsedData.push(roll);
-      });
-
-      const returnData = JSON.stringify(parsedData);
-
-      fs.writeFile("../data/toiletroll.json", returnData, "utf-8")
-        .then(() => {
-          console.log("ToiletRoll JSON updated (Iceland)");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await sender(toiletRollArr).then(() => {
+      console.log("ToiletRoll updated (Iceland)");
     });
   } catch (err) {
     console.log(err);
@@ -156,7 +134,9 @@ async function getPastaPrice() {
         pastaObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "pasta",
@@ -165,22 +145,8 @@ async function getPastaPrice() {
         pastaArr.push(pastaObj);
       }
     });
-
-    fs.readFile("../data/pasta.json").then((data) => {
-      const parsedData = JSON.parse(data);
-      pastaArr.forEach((pasta) => {
-        parsedData.push(pasta);
-      });
-
-      const returnData = JSON.stringify(parsedData);
-
-      fs.writeFile("../data/pasta.json", returnData, "utf-8")
-        .then(() => {
-          console.log("Pasta JSON updated (Iceland)");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await sender(pastaArr).then(() => {
+      console.log("Pasta updated (Iceland)");
     });
   } catch (err) {
     console.log(err);
@@ -215,7 +181,9 @@ async function getEggsPrice() {
         eggsObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "eggs",
@@ -224,22 +192,8 @@ async function getEggsPrice() {
         eggsArr.push(eggsObj);
       }
     });
-
-    fs.readFile("../data/eggs.json").then((data) => {
-      const parsedData = JSON.parse(data);
-      eggsArr.forEach((eggs) => {
-        parsedData.push(eggs);
-      });
-
-      const returnData = JSON.stringify(parsedData);
-
-      fs.writeFile("../data/eggs.json", returnData, "utf-8")
-        .then(() => {
-          console.log("Eggs JSON updated (Iceland)");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await sender(eggsArr).then(() => {
+      console.log("Eggs updated (Iceland)");
     });
   } catch (err) {
     console.log(err);
@@ -276,7 +230,9 @@ async function getMilkPrice() {
         milkObj = {
           name,
           description,
-          price,
+          priceHistory: [
+            { updateDate: moment().format("MMM Do[|]hh:mma"), price: price },
+          ],
           siteLink,
           pictureLink,
           category: "milk",
@@ -286,25 +242,16 @@ async function getMilkPrice() {
       }
     });
 
-    fs.readFile("../data/milk.json").then((data) => {
-      const parsedData = JSON.parse(data);
-      milkArr.forEach((milk) => {
-        parsedData.push(milk);
-      });
-
-      const returnData = JSON.stringify(parsedData);
-
-      fs.writeFile("../data/milk.json", returnData, "utf-8")
-        .then(() => {
-          console.log("Milk JSON updated (Iceland)");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await sender(milkArr).then(() => {
+      console.log("Milk updated (Iceland)");
     });
   } catch (err) {
     console.log(err);
   }
 }
 
+getBreadPrice();
+getEggsPrice();
 getMilkPrice();
+getPastaPrice();
+getToiletRollPrice();
