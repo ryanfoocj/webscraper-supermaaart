@@ -1,8 +1,7 @@
 const { MongoClient } = require("mongodb");
-const fs = require("fs/promises");
+
 const moment = require("moment");
 
-console.log(process.env.MONGO_URI);
 const uri = process.env.MONGO_URI;
 
 const client = new MongoClient(uri);
@@ -11,7 +10,7 @@ async function sender(data) {
   try {
     await client.connect();
 
-    const db = client.db("DEMO-DATABASE");
+    const db = client.db("scrapedtest");
     const coll = db.collection("products");
 
     data.map((product) => {

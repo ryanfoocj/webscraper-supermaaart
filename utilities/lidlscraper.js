@@ -1,7 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
-const fs = require("fs/promises");
+
 const moment = require("moment");
 const { MongoClient } = require("mongodb");
 const sender = require("./sender");
