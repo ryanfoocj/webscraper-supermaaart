@@ -77,6 +77,7 @@ async function getElements(elements) {
                 description: description ??'',
                 priceHistory: [
                     { updateDate: moment().format("MMM Do[|]hh:mma"), price: price }, ],
+                price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
                 category: "bread",
@@ -105,6 +106,7 @@ async function WebScrapingLocalTest() {
         );
 
         return await getElements(allElements);
+        console.log(getElements(allElements))
     } catch (error) {
         throw new Error (error);
     } finally {

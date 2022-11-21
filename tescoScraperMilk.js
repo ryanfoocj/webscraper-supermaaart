@@ -77,6 +77,7 @@ async function getElements(elements) {
                 description: description ??'',
                 priceHistory: [
                     { updateDate: moment().format("MMM Do[|]hh:mma"), price: price }, ],
+                price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
                 category: "milk",

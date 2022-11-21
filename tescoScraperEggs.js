@@ -68,6 +68,7 @@ async function getElements(elements) {
             const name = dataBlocks[0];
             const id = prodNumbers[name];
             const price = dataBlocks[4];
+            
             const description = ProdDesc[id];
             const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
             const pictureLink = prodImg[id];
@@ -77,6 +78,7 @@ async function getElements(elements) {
                 description: description ??'',
                 priceHistory: [
                     { updateDate: moment().format("MMM Do[|]hh:mma"), price: price }, ],
+                price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
                 category: "eggs",
