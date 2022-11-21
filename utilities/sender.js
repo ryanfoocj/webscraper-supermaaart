@@ -11,7 +11,7 @@ async function sender(data) {
   try {
     await client.connect();
 
-    const db = client.db("scrapedtest");
+    const db = client.db("DEMO-DATABASE");
     const coll = db.collection("products");
 
     data.map((product) => {
@@ -26,10 +26,11 @@ async function sender(data) {
             $set: {
               name: product.name,
               pictureLink: product.pictureLink,
-
+              siteLink: product.siteLink,
               description: product.description,
               category: product.category,
               supermarket: product.supermarket,
+              price: product.priceHistory[0].price,
               priceHistory: {
                 $concatArrays: [
                   {

@@ -36,7 +36,7 @@ async function getToiletRollPrice() {
         description = description.replace(/\s\s+/g, " ").trim();
 
         let price = $(parentElem).find(".lidl-m-pricebox__price").text();
-        price = parseFloat(price.substring(1));
+        price = price.substring(1);
 
         toiletRollObj = {
           name,
@@ -84,7 +84,7 @@ async function getEggsPrice() {
       name = name.replace(/\s\s+/g, " ").trim();
 
       let price = $(parentElem).find(".lidl-m-pricebox__price").text();
-      price = parseFloat(price.substring(1));
+      price = price.substring(1);
 
       eggsObj = {
         name,
@@ -135,7 +135,7 @@ async function getMilkPrice() {
         name = name.substring(0, name.length - 2);
 
         let price = $(parentElem).find(".lidl-m-pricebox__price").text();
-        price = parseFloat(price.substring(1));
+        price = price.substring(1);
 
         milkObj = {
           name,
@@ -184,7 +184,7 @@ async function getPastaPrice() {
         name = name.replace(/\s\s+/g, " ").trim();
 
         let price = $(parentElem).find(".lidl-m-pricebox__price").text();
-        price = parseFloat(price.substring(1));
+        price = price.substring(1);
 
         pastaObj = {
           name,
