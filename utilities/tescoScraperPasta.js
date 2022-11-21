@@ -1,9 +1,11 @@
 const express = require('express')
 const { Builder, By } = require('selenium-webdriver');
 const moment = require("moment");
+const sender = require('./sender');
 
+/*
 const app = express()
-const port = 3001
+const port = 3000
 app.get('/', async (request, response) => {
     //code
     try {
@@ -15,6 +17,7 @@ app.get('/', async (request, response) => {
         });
     }
 })
+*/
 
 async function getElements(elements) {
     let count = 1;
@@ -23,9 +26,9 @@ async function getElements(elements) {
         while(count < 6){
         for (const element of elements) {
             //these elements can only be retrieved with product numbers
-            const prodNumbers = { "Tesco Luxury Soft Toilet Tissue White 4 Roll":281055580, "Aria Essentials Toilet Tissue 6 Roll 400 Sheets":305944361, "Spring Force Toilet Tissue 6 White Double Rolls":309753465, "Andrex Classic Clean Toilet Tissue 4 Rolls":309762431, "Tesco Luxury Soft White Toilet Tissue 6 Long Rolls":312214351}
-            const prodImg = { 281055580:"https://digitalcontent.api.tesco.com/v2/media/ghs/26c90548-4c26-4929-9a64-38e9f962aa01/1b813dd2-37e2-4c65-a366-b347e0114a9c.jpeg?h=540&w=540", 305944361:"https://digitalcontent.api.tesco.com/v2/media/ghs/6f5f1fbf-1573-4aa8-992f-a06a4cea422b/2674dc33-7b05-4e6e-ab4e-ccacdaf008cd_1774816209.jpeg?h=540&w=540", 309753465:"https://digitalcontent.api.tesco.com/v2/media/ghs/2915ce65-25b9-44eb-9475-443fc4617107/05763154-6856-49d6-bb2d-e40f32483111_815555519.jpeg?h=540&w=540", 309762431:"https://digitalcontent.api.tesco.com/v2/media/ghs/b4b97566-51c3-46c8-92af-283fd2054df3/6678d277-aa87-498f-b0f1-ba82d83d6ed3_517079285.jpeg?h=540&w=540", 312214351:"https://digitalcontent.api.tesco.com/v2/media/ghs/6d57bb4e-cef2-4dd1-b9cf-b5826b808447/c81e8f87-a6f3-4a44-afbe-43da2b2ebaf4.jpeg?h=540&w=540"}
-            const prodDesc = { 281055580:"Luxury Soft toilet tissue 4 rolls.", 305944361:"Aria Essentials T/Tissue 6 Roll 400 Sheets", 309753465:"Springforce Toilet Tissue", 309762431:"Andrex Classic Clean Toilet Tissue 4 Rolls", 312214351:"Luxury Soft toilet tissue 6 long rolls"}
+            const prodNumbers = {"Hearty Food Co. Spaghetti Pasta 500G":297844134 , "Hearty Food Co. Penne Pasta 500G":297844111 , "Tesco Margheritine Soup Pasta 250G":277017009 , "Tesco Lasagne Pasta 500G":250211327 , "Tesco Tagliatelle Pasta 500G": 250211356}
+            const prodDesc = {297844134:"Dried spaghetti pasta made from durum wheat semolina and wheat flour." , 297844111:"Dried penne pasta made from durum wheat semolina and wheat flour." , 277017009:"Dried margheritine pasta made from durum wheat semolina." , 250211327:"Dried lasagne pasta made from durum wheat semolina." , 250211356:"https://digitalcontent.api.tesco.com/v2/media/ghs/7d0292bf-435e-4611-aaab-765588d98d5f/b97baf45-d688-4cfa-93c7-c3af21d832df_918815770.jpeg?h=540&w=540" }
+            const prodImg = {297844134:"https://digitalcontent.api.tesco.com/v2/media/ghs/0021228a-cda2-4239-a591-aa8985b2ead8/0730a509-b569-4057-a8cf-c563ba0e31b8_135498198.jpeg?h=540&w=540" , 297844111:"https://digitalcontent.api.tesco.com/v2/media/ghs/45784820-0352-41f8-8fd3-a83787b549d2/64ded30e-93a1-441a-b170-335fed5e1a2c_1977549637.jpeg?h=540&w=540" , 277017009:"https://digitalcontent.api.tesco.com/v2/media/ghs/a2930aa6-1978-4040-85cf-2c85bc7b64e7/84fbc9ec-5009-4b25-8e83-31188b8d8912_1839662721.jpeg?h=540&w=540" , 250211327:"https://digitalcontent.api.tesco.com/v2/media/ghs/3d529bc4-3c99-4c52-8dfc-ce2154217046/3b1cbd86-a340-4d01-84b3-d3f8665c0987_1597783851.jpeg?h=540&w=540" , 250211356:"Dried tagliatelle pasta made from durum wheat semolina." }
 
             const data = await element.findElement(By.css(`li.product-list--list-item:nth-child(${count}) > div > div`)).getText();
             const dataBlocks = data.split(`\n`)
@@ -60,10 +63,15 @@ async function getElements(elements) {
                     dataBlocks.splice(delivery, 1)
                 }
             }
+            const deal = dataBlocks.indexOf("Buy Dolmio Sauce 470g/500g and Save 95p on Tesco Core Pasta 500g Clubcard Price");
+            if (deal > -1){
+                    dataBlocks[4] = dataBlocks[6]
+                }
             const notStocked = dataBlocks.indexOf("This product's currently out of stock");
             if(notStocked > -1){
                 dataBlocks[4] = "currently out of stock"
             }
+            
             const name = dataBlocks[0];
             const id = prodNumbers[name];
             const price = dataBlocks[4];
@@ -79,8 +87,8 @@ async function getElements(elements) {
                 price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
-                category: "toiletroll",
-                shop: "tesco"
+                category: "pasta",
+                supermarket: "tesco"
             });  
         }
         count ++;
@@ -91,23 +99,27 @@ async function getElements(elements) {
     return elementDetails;
 } 
 
+/*
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
+*/
 
-async function WebScrapingLocalTest() {
+async function WebScrapingLocalTestPasta() {
     try {
         driver = await new Builder().forBrowser('chrome').build();
-        await driver.get("https://www.tesco.com/groceries/en-GB/shop/household/toilet-roll/standard-toilet-roll?sortBy=price-ascending")
+        await driver.get("https://www.tesco.com/groceries/en-GB/shop/food-cupboard/dried-pasta-rice-noodles-and-cous-cous/pasta-and-spaghetti?sortBy=price-ascending")
 
         const allElements = await driver.findElements(
             By.css(".product-list")
         );
 
-        return await getElements(allElements);
+        return await getElements(allElements).then((elementDetails) => sender(elementDetails));
     } catch (error) {
         throw new Error (error);
     } finally {
         await driver.quit();
     }
 }
+setTimeout(WebScrapingLocalTestPasta, 10000);
+console.log("Pasta updated (Tesco)")

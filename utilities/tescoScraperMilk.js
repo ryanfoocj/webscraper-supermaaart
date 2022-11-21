@@ -1,7 +1,9 @@
 const express = require('express')
 const { Builder, By } = require('selenium-webdriver');
 const moment = require("moment");
+const sender = require('./sender');
 
+/*
 const app = express()
 const port = 3000
 app.get('/', async (request, response) => {
@@ -15,6 +17,7 @@ app.get('/', async (request, response) => {
         });
     }
 })
+*/
 
 async function getElements(elements) {
     let count = 1;
@@ -23,9 +26,9 @@ async function getElements(elements) {
         while(count < 6){
         for (const element of elements) {
             //these elements can only be retrieved with product numbers
-            const prodNumbers = {"Hearty Food Co. Spaghetti Pasta 500G":297844134 , "Hearty Food Co. Penne Pasta 500G":297844111 , "Tesco Margheritine Soup Pasta 250G":277017009 , "Tesco Lasagne Pasta 500G":250211327 , "Tesco Tagliatelle Pasta 500G": 250211356}
-            const prodDesc = {297844134:"Dried spaghetti pasta made from durum wheat semolina and wheat flour." , 297844111:"Dried penne pasta made from durum wheat semolina and wheat flour." , 277017009:"Dried margheritine pasta made from durum wheat semolina." , 250211327:"Dried lasagne pasta made from durum wheat semolina." , 250211356:"https://digitalcontent.api.tesco.com/v2/media/ghs/7d0292bf-435e-4611-aaab-765588d98d5f/b97baf45-d688-4cfa-93c7-c3af21d832df_918815770.jpeg?h=540&w=540" }
-            const prodImg = {297844134:"https://digitalcontent.api.tesco.com/v2/media/ghs/0021228a-cda2-4239-a591-aa8985b2ead8/0730a509-b569-4057-a8cf-c563ba0e31b8_135498198.jpeg?h=540&w=540" , 297844111:"https://digitalcontent.api.tesco.com/v2/media/ghs/45784820-0352-41f8-8fd3-a83787b549d2/64ded30e-93a1-441a-b170-335fed5e1a2c_1977549637.jpeg?h=540&w=540" , 277017009:"https://digitalcontent.api.tesco.com/v2/media/ghs/a2930aa6-1978-4040-85cf-2c85bc7b64e7/84fbc9ec-5009-4b25-8e83-31188b8d8912_1839662721.jpeg?h=540&w=540" , 250211327:"https://digitalcontent.api.tesco.com/v2/media/ghs/3d529bc4-3c99-4c52-8dfc-ce2154217046/3b1cbd86-a340-4d01-84b3-d3f8665c0987_1597783851.jpeg?h=540&w=540" , 250211356:"Dried tagliatelle pasta made from durum wheat semolina." }
+            const prodNumbers = {"Creamfields Uht Skimmed Milk 1 Litre": 299914291, "Dairy Pride Uht Skimmed Milk 1 Litre": 308100946, "Creamfields Uht Semi Skimmed Milk 1 Litre": 299914279, "Lactofree Milk Longlife Portions 5X20ml": 267309503, "Tesco Skimmed Milk 568Ml/1 Pint": 251314095}
+            const prodImg = {299914291: "https://digitalcontent.api.tesco.com/v2/media/ghs/20ed9476-d671-41c1-897f-548a7d8aca43/e6d4c381-ea17-4c77-bc81-4a826bfa9ba0_726184814.jpeg?h=540&w=540", 308100946: "https://digitalcontent.api.tesco.com/v2/media/ghs/d2fdb6c5-897e-42b6-97ce-3694e015cdf3/d3632bad-28c4-4448-9d18-36a98474b0fb_2123041940.jpeg?h=540&w=540", 299914279: "https://digitalcontent.api.tesco.com/v2/media/ghs/9dc25e10-6d3c-4e4d-8698-74c06e932892/5558a634-c0cd-4e96-8e4e-8eeda8884fde_401745111.jpeg?h=540&w=540", 267309503: "https://digitalcontent.api.tesco.com/v2/media/ghs/38d5cfae-0ea4-43e8-94ad-322fb239b124/f9e7f10a-dbc2-4355-956e-704f2032d402.jpeg?h=540&w=540", 251314095: "https://digitalcontent.api.tesco.com/v2/media/ghs/6e2f4753-eab4-4449-a1e0-4b43ac6a7d08/36b5b284-a1e9-4961-98fc-358259dec91f.jpeg?h=540&w=540"}
+            const prodDesc = {299914291: "UHT skimmed milk.", 308100946: "Ultra Heat Treated Skimmed Milk", 299914279: "UHT homogenised semi skimmed milk.", 267309503: "Lactose Free UHT Homogenised Standardised Semi Skimmed Filtered Milk Drink", 251314095: "Pasteurised skimmed milk."}
 
             const data = await element.findElement(By.css(`li.product-list--list-item:nth-child(${count}) > div > div`)).getText();
             const dataBlocks = data.split(`\n`)
@@ -60,15 +63,11 @@ async function getElements(elements) {
                     dataBlocks.splice(delivery, 1)
                 }
             }
-            const deal = dataBlocks.indexOf("Buy Dolmio Sauce 470g/500g and Save 95p on Tesco Core Pasta 500g Clubcard Price");
-            if (deal > -1){
-                    dataBlocks[4] = dataBlocks[6]
-                }
             const notStocked = dataBlocks.indexOf("This product's currently out of stock");
             if(notStocked > -1){
                 dataBlocks[4] = "currently out of stock"
             }
-            
+
             const name = dataBlocks[0];
             const id = prodNumbers[name];
             const price = dataBlocks[4];
@@ -84,8 +83,8 @@ async function getElements(elements) {
                 price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
-                category: "pasta",
-                shop: "tesco"
+                category: "milk",
+                supermarket: "tesco"
             });  
         }
         count ++;
@@ -96,23 +95,28 @@ async function getElements(elements) {
     return elementDetails;
 } 
 
+/*
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
+*/
 
-async function WebScrapingLocalTest() {
+async function WebScrapingLocalTestMilk() {
     try {
         driver = await new Builder().forBrowser('chrome').build();
-        await driver.get("https://www.tesco.com/groceries/en-GB/shop/food-cupboard/dried-pasta-rice-noodles-and-cous-cous/pasta-and-spaghetti?sortBy=price-ascending")
+        await driver.get("https://www.tesco.com/groceries/en-GB/shop/fresh-food/milk-butter-and-eggs/milk?sortBy=price-ascending")
 
         const allElements = await driver.findElements(
             By.css(".product-list")
         );
 
-        return await getElements(allElements);
+        return await getElements(allElements).then((elementDetails) => sender(elementDetails));
     } catch (error) {
         throw new Error (error);
     } finally {
         await driver.quit();
     }
 }
+
+setTimeout(WebScrapingLocalTestMilk, 5000);
+console.log("Milk updated (Tesco)")

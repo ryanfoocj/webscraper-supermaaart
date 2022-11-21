@@ -1,7 +1,9 @@
 const express = require('express')
 const { Builder, By } = require('selenium-webdriver');
 const moment = require("moment");
+const sender = require('./sender');
 
+/*
 const app = express()
 const port = 3000
 app.get('/', async (request, response) => {
@@ -15,6 +17,7 @@ app.get('/', async (request, response) => {
         });
     }
 })
+*/
 
 async function getElements(elements) {
     let count = 1;
@@ -23,11 +26,11 @@ async function getElements(elements) {
         while(count < 6){
         for (const element of elements) {
             //these elements can only be retrieved with product numbers
-            const prodNumbers = {"H W Nevill's White Bread 800G": 299045570, "Tesco White Bread 800G": 299389116, "Tesco Toastie White Bread Thick 800G": 299425748, "Tesco White Crusty Cob": 305961904, "Crusty White Bloomer Sliced 400G": 258397693}
-            const prodImg = {299045570: 'https://digitalcontent.api.tesco.com/v2/media/ghs/719aef95-1185-49ce-a510-e83d216b50f8/64231253-1022-4472-bfa4-4ede5f9b1fd9.jpeg?h=540&w=540', 299389116: 'https://digitalcontent.api.tesco.com/v2/media/ghs/e80688e5-6eda-4de5-97b5-4a751751109b/d5d753df-5f3b-46d1-ac50-3f2a6dec3fcf.jpeg?h=540&w=540', 299425748: 'https://digitalcontent.api.tesco.com/v2/media/ghs/57190e4b-68e6-48cc-9f49-18c5c4166d68/584bffe6-3613-427d-9f34-5df17198ba6b.jpeg?h=540&w=540' , 305961904: 'https://digitalcontent.api.tesco.com/v2/media/ghs/5ee84b69-7482-42e8-9482-66b7b40d3d34/fc41462f-e6a8-4b19-ba3f-a116ac88c813.jpeg?h=540&w=540', 258397693: 'https://digitalcontent.api.tesco.com/v2/media/ghs/f4cc3065-afbc-4cf0-8477-57e05a45f335/eca9a625-7457-49db-9b09-536840647de0.jpeg?h=540&w=540'}
-            const prodDesc = {299045570: 'Medium sliced white bread.', 299389116: 'Medium sliced white bread.', 299425748:  'Thick sliced white bread.', 305961904: ' baked for a golden crust and soft, fluffy inside.', 258397693: 'Sliced White Bloomer baked for a golden crust and soft, fluffy inside. Sliced in store.'}
-            
+            const prodNumbers = {"Tesco Medium Free Range Eggs 6 Pack": 250802613, "Big & Fresh Mixed Sized Eggs 6 Pack": 253270171, "Tesco 15 Eggs": 299626009, "Tesco Large Free Range Eggs 6 Pack": 250802567, "Tesco Free Range Eggs Very Large 6 Pack": 252781973}
+            const prodImg = {250802613: 'https://digitalcontent.api.tesco.com/v2/media/ghs/b4147169-aef2-4677-98a3-d31736379066/ee02524e-e3a5-408d-8172-b7d9cccb6b5a.jpeg?h=540&w=540', 253270171: 'https://digitalcontent.api.tesco.com/v2/media/ghs/2eb968eb-b8ba-4e83-807c-9045a458e1e0/361ba900-c538-4f11-b808-ed10a1548ddd.jpeg?h=540&w=540', 299626009: 'https://digitalcontent.api.tesco.com/v2/media/ghs/df176611-9b0d-4489-b9ac-fa20964dd858/b80df98c-6159-4be1-9f43-d67341e0cb52.jpeg?h=540&w=540' , 250802567: 'https://digitalcontent.api.tesco.com/v2/media/ghs/533fe07f-de38-4064-adbb-2761705870f0/f49b79da-20ca-41a5-8556-1a44725797f6.jpeg?h=540&w=540', 252781973: 'https://digitalcontent.api.tesco.com/v2/media/ghs/2c49507a-2e47-431a-b88a-006b06166a1b/ed8aee54-94ba-4ec9-9e32-6533e3d299dd.jpeg?h=540&w=540'}
+            const ProdDesc = {250802613: "Medium Class A Free Range Eggs.", 253270171: "Eggs of different sizes.", 299626009: "Class A eggs from caged hens.", 250802567: "6 Large class A free range eggs.", 252781973: "6 Very large class A free range eggs."}
             const data = await element.findElement(By.css(`li.product-list--list-item:nth-child(${count}) > div > div`)).getText();
+
             const dataBlocks = data.split(`\n`)
             //cutting elements that alter output parity
             if(dataBlocks.indexOf('Write a review')){
@@ -63,12 +66,13 @@ async function getElements(elements) {
             const notStocked = dataBlocks.indexOf("This product's currently out of stock");
             if(notStocked > -1){
                 dataBlocks[4] = "currently out of stock"
-            }            
+            }
 
             const name = dataBlocks[0];
             const id = prodNumbers[name];
             const price = dataBlocks[4];
-            const description = prodDesc[id];
+            
+            const description = ProdDesc[id];
             const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
             const pictureLink = prodImg[id];
 
@@ -80,8 +84,8 @@ async function getElements(elements) {
                 price: price ??'',
                 siteLink: siteLink ?? '',
                 pictureLink: pictureLink ?? '',
-                category: "bread",
-                shop: "tesco"
+                category: "eggs",
+                supermarket: "tesco"
             });  
         }
         count ++;
@@ -92,24 +96,28 @@ async function getElements(elements) {
     return elementDetails;
 } 
 
+/*
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
+*/
 
-async function WebScrapingLocalTest() {
+async function WebScrapingLocalTestEggs() {
     try {
         driver = await new Builder().forBrowser('chrome').build();
-        await driver.get("https://www.tesco.com/groceries/en-GB/shop/bakery/bread-and-rolls/white-bread?sortBy=price-ascending")
+        await driver.get("https://www.tesco.com/groceries/en-GB/shop/fresh-food/milk-butter-and-eggs/eggs?sortBy=price-ascending")
 
         const allElements = await driver.findElements(
             By.css(".product-list")
         );
 
-        return await getElements(allElements);
-        console.log(getElements(allElements))
+        return await getElements(allElements).then((elementDetails) => sender(elementDetails));
     } catch (error) {
         throw new Error (error);
     } finally {
         await driver.quit();
     }
 }
+
+setTimeout(WebScrapingLocalTestEggs, 15000);
+console.log("Eggs updated (Tesco)")
