@@ -101,9 +101,11 @@ async function getElements(elements) {
           "This product's currently out of stock"
         );
         if (notStocked > -1) {
-          dataBlocks[4] = "currently out of stock";
+          delete dataBlocks //[4] = "currently out of stock";
         }
 
+
+        if(dataBlocks) {
         const name = dataBlocks[0];
         const id = prodNumbers[name];
         const price = dataBlocks[4].substring(1);
@@ -123,6 +125,7 @@ async function getElements(elements) {
           category: "bread",
           supermarket: "tesco",
         });
+        }
       }
       count++;
     }
