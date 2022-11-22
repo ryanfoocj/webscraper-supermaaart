@@ -96,6 +96,21 @@ async function getElements(elements) {
             dataBlocks.splice(delivery, 1);
           }
         }
+
+        if (dataBlocks.indexOf("100% more sheets per roll, lasts longer than a standard roll")) {
+            const delivery = dataBlocks.indexOf("100% more sheets per roll, lasts longer than a standard roll");
+            if (delivery > -1) {
+              dataBlocks.splice(delivery, 1);
+            }
+        }
+
+        if (dataBlocks.indexOf("50% more sheets per roll, lasts longer than a standard roll")) {
+            const delivery = dataBlocks.indexOf("50% more sheets per roll, lasts longer than a standard roll");
+            if (delivery > -1) {
+              dataBlocks.splice(delivery, 1);
+            }
+          }
+
         const notStocked = dataBlocks.indexOf(
           "This product's currently out of stock"
         );
@@ -110,7 +125,6 @@ async function getElements(elements) {
         const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
         const pictureLink = prodImg[id];
 
-        if(price[0] === "£") {
         elementDetails.push({
           name: name ?? "",
           description: description ?? "",
@@ -124,7 +138,7 @@ async function getElements(elements) {
           supermarket: "tesco",
         });
         }
-        }
+        
       }
       count++;
     }
