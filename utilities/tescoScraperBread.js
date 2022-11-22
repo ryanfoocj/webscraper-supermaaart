@@ -97,6 +97,8 @@ async function getElements(elements) {
             dataBlocks.splice(delivery, 1);
           }
         }
+
+        
         const notStocked = dataBlocks.indexOf(
           "This product's currently out of stock"
         );
