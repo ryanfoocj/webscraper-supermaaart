@@ -106,7 +106,7 @@ async function getElements(elements) {
 
         const name = dataBlocks[0];
         const id = prodNumbers[name];
-        const price = dataBlocks[4];
+        const price = dataBlocks[4].substring(1);
         const description = prodDesc[id];
         const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
         const pictureLink = prodImg[id];

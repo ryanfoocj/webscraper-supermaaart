@@ -1,10 +1,10 @@
 const { MongoClient } = require("mongodb");
 
-const uri = process.env.MONGO_URI;
+/* const uri = process.env.MONGO_URI;
 
-const client = new MongoClient(uri);
+const client = new MongoClient(uri); */
 
-async function update() {
+/* async function update() {
   try {
     await client.connect();
 
@@ -21,7 +21,9 @@ async function update() {
     console.log(err);
     await client.close();
   }
-}
-update();
+} */
+//( * 10) / 10)
+
+console.log(Math.ceil(Math.random() * (6 - 1) * 10) / 10);
 
 module.exports = update();

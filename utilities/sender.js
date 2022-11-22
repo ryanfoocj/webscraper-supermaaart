@@ -14,6 +14,14 @@ async function sender(data) {
     const coll = db.collection("products");
 
     data.map((product) => {
+      const currentPrice = product.priceHistory[0].price;
+      let falsePrice =
+        Math.ceil(
+          Math.random() *
+            (currentPrice + 1 - (currentPrice - 1) + (currentPrice - 0.5)) *
+            10
+        ) / 10;
+      falsePrice = falsePrice.toFixed(2);
       coll.updateOne(
         {
           name: product.name,
@@ -37,8 +45,8 @@ async function sender(data) {
                   },
                   [
                     {
-                      updateDate: moment().format("MMM Do[|]hh:mma"),
-                      price: product.priceHistory[0].price,
+                      updateDate: "Nov 21|12:00pm",
+                      price: falsePrice,
                     },
                   ],
                 ],
@@ -56,5 +64,6 @@ async function sender(data) {
     await client.close();
   }
 }
-
+//updateDate: moment().format("MMM Do[|]hh:mma")
+//price: product.priceHistory[0].price
 module.exports = sender;
