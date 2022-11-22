@@ -65,7 +65,7 @@ async function getElements(elements) {
             }
             const notStocked = dataBlocks.indexOf("This product's currently out of stock");
             if(notStocked > -1){
-                dataBlocks[4] = "currently out of stock"
+                delete dataBlocks //[4] = "currently out of stock"
             }
             const name = dataBlocks[0];
             const id = prodNumbers[name];
