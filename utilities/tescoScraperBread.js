@@ -113,7 +113,7 @@ async function getElements(elements) {
         const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
         const pictureLink = prodImg[id];
 
-        if(/^£/.test(price)) {
+        
         elementDetails.push({
           name: name ?? "",
           description: description ?? "",
@@ -127,7 +127,7 @@ async function getElements(elements) {
           supermarket: "tesco",
         });
         }
-        }
+        
       }
       count++;
     }
