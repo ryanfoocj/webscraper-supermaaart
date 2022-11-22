@@ -10,15 +10,16 @@ async function sender(data) {
   try {
     await client.connect();
 
-    const db = client.db("scrapedtest");
-    const coll = db.collection("products");
+    const db = client.db("DEMO-DATABASE");
+    const coll = db.collection("products2");
 
     data.map((product) => {
-      const currentPrice = product.priceHistory[0].price;
+      const currentPrice = parseFloat(product.priceHistory[0].price);
+
       let falsePrice =
         Math.ceil(
-          Math.random() *
-            (currentPrice + 1 - (currentPrice - 1) + (currentPrice - 0.5)) *
+          (Math.random() * (currentPrice + 1 - (currentPrice - 0.5)) +
+            (currentPrice - 0.5)) *
             10
         ) / 10;
       falsePrice = falsePrice.toFixed(2);
@@ -37,6 +38,7 @@ async function sender(data) {
               description: product.description,
               category: product.category,
               supermarket: product.supermarket,
+              rating: Math.floor(Math.random() * (6 - 1) + 1),
               price: product.priceHistory[0].price,
               priceHistory: {
                 $concatArrays: [
@@ -45,7 +47,7 @@ async function sender(data) {
                   },
                   [
                     {
-                      updateDate: "Nov 21|12:00pm",
+                      updateDate: "Nov 29",
                       price: falsePrice,
                     },
                   ],
