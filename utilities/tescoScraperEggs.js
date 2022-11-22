@@ -32,6 +32,7 @@ async function getElements(elements) {
           "Tesco 15 Eggs": 299626009,
           "Tesco Large Free Range Eggs 6 Pack": 250802567,
           "Tesco Free Range Eggs Very Large 6 Pack": 252781973,
+          "Happy Egg Co Medium Free Range Eggs 6 Pack": 264328894
         };
         const prodImg = {
           250802613:
@@ -44,6 +45,7 @@ async function getElements(elements) {
             "https://digitalcontent.api.tesco.com/v2/media/ghs/533fe07f-de38-4064-adbb-2761705870f0/f49b79da-20ca-41a5-8556-1a44725797f6.jpeg?h=540&w=540",
           252781973:
             "https://digitalcontent.api.tesco.com/v2/media/ghs/2c49507a-2e47-431a-b88a-006b06166a1b/ed8aee54-94ba-4ec9-9e32-6533e3d299dd.jpeg?h=540&w=540",
+            264328894: "https://digitalcontent.api.tesco.com/v2/media/ghs/73ddd105-5efc-44ba-96f2-9c9114114b08/49101051-3801-424c-afcb-674b45eb9d5c.jpeg?h=540&w=540"
         };
         const ProdDesc = {
           250802613: "Medium Class A Free Range Eggs.",
@@ -51,6 +53,7 @@ async function getElements(elements) {
           299626009: "Class A eggs from caged hens.",
           250802567: "6 Large class A free range eggs.",
           252781973: "6 Very large class A free range eggs.",
+          264328894: "Our girls are fed on a diet rich in Vitamin D, which means 2 Medium Happy Eggs naturally contain 80% of your daily need."
         };
         const data = await element
           .findElement(

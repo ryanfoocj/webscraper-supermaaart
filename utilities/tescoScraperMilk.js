@@ -103,6 +103,13 @@ async function getElements(elements) {
             dataBlocks.splice(delivery, 1);
           }
         }
+        if (dataBlocks.indexOf("Dairy Pride Uht Skimmed Milk 1 Litre")) {
+            const delivery = dataBlocks.indexOf("Dairy Pride Uht Skimmed Milk 1 Litre");
+            if (delivery > -1) {
+              delete dataBlocks;
+            }
+          }
+
         const notStocked = dataBlocks.indexOf(
           "This product's currently out of stock"
         );

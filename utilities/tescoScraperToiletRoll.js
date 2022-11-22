@@ -111,10 +111,10 @@ async function getElements(elements) {
             }
           }
 
-          if (dataBlocks.indexOf("£2.80 clubcard price")) {
-            const delivery = dataBlocks.indexOf("Clubcard Price");
+          if (dataBlocks.indexOf("Andrex Classic Clean Toilet Tissue 4 Rolls")) {
+            const delivery = dataBlocks.indexOf("Andrex Classic Clean Toilet Tissue 4 Rolls");
             if (delivery > -1) {
-              dataBlocks.splice(delivery, 1);
+              delete dataBlocks;
             }
           }
 
