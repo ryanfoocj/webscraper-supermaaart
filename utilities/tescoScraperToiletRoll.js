@@ -110,7 +110,7 @@ async function getElements(elements) {
         const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
         const pictureLink = prodImg[id];
 
-        if(/^£/.test(price)) {
+        if(price[0] === "£") {
         elementDetails.push({
           name: name ?? "",
           description: description ?? "",
