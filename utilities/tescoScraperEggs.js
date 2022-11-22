@@ -159,5 +159,5 @@ async function WebScrapingLocalTestEggs() {
   }
 }
 
-setTimeout(WebScrapingLocalTestEggs, 15000);
+setTimeout(WebScrapingLocalTestEggs, 30000);
 console.log("Eggs updated (Tesco)");

@@ -158,5 +158,5 @@ async function WebScrapingLocalTestMilk() {
   }
 }
 
-setTimeout(WebScrapingLocalTestMilk, 5000);
+setTimeout(WebScrapingLocalTestMilk, 10000);
 console.log("Milk updated (Tesco)");

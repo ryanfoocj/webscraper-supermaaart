@@ -165,5 +165,5 @@ async function WebScrapingLocalTestPasta() {
     await driver.quit();
   }
 }
-setTimeout(WebScrapingLocalTestPasta, 10000);
+setTimeout(WebScrapingLocalTestPasta, 20000);
 console.log("Pasta updated (Tesco)");

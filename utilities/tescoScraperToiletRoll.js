@@ -157,5 +157,5 @@ async function WebScrapingLocalTestToiletRoll() {
   }
 }
 
-setTimeout(WebScrapingLocalTestToiletRoll, 20000);
+setTimeout(WebScrapingLocalTestToiletRoll, 40000);
 console.log("ToiletRoll updated (Tesco)");
