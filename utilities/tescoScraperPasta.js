@@ -32,6 +32,8 @@ async function getElements(elements) {
           "Tesco Margheritine Soup Pasta 250G": 277017009,
           "Tesco Lasagne Pasta 500G": 250211327,
           "Tesco Tagliatelle Pasta 500G": 250211356,
+          "Tesco Triclore Fusilli Pasta Twists 500G": 254878522,
+          "Tesco Fusilli Pasta 500G": 254878545
         };
         const prodDesc = {
           297844134:
@@ -40,8 +42,9 @@ async function getElements(elements) {
             "Dried penne pasta made from durum wheat semolina and wheat flour.",
           277017009: "Dried margheritine pasta made from durum wheat semolina.",
           250211327: "Dried lasagne pasta made from durum wheat semolina.",
-          250211356:
-            "https://digitalcontent.api.tesco.com/v2/media/ghs/7d0292bf-435e-4611-aaab-765588d98d5f/b97baf45-d688-4cfa-93c7-c3af21d832df_918815770.jpeg?h=540&w=540",
+          250211356: "Dried tagliatelle pasta made from durum wheat semolina.",
+            254878522: "Dried tricolore fusilli pasta made from durum wheat semolina, spinach and tomato powders.",
+            254878545: "Dried fusilli pasta made from durum wheat semolina."
         };
         const prodImg = {
           297844134:
@@ -52,7 +55,9 @@ async function getElements(elements) {
             "https://digitalcontent.api.tesco.com/v2/media/ghs/a2930aa6-1978-4040-85cf-2c85bc7b64e7/84fbc9ec-5009-4b25-8e83-31188b8d8912_1839662721.jpeg?h=540&w=540",
           250211327:
             "https://digitalcontent.api.tesco.com/v2/media/ghs/3d529bc4-3c99-4c52-8dfc-ce2154217046/3b1cbd86-a340-4d01-84b3-d3f8665c0987_1597783851.jpeg?h=540&w=540",
-          250211356: "Dried tagliatelle pasta made from durum wheat semolina.",
+          250211356: "https://digitalcontent.api.tesco.com/v2/media/ghs/7d0292bf-435e-4611-aaab-765588d98d5f/b97baf45-d688-4cfa-93c7-c3af21d832df_918815770.jpeg?h=540&w=540",
+          254878522: "https://digitalcontent.api.tesco.com/v2/media/ghs/f23b2bd8-051e-4269-93bc-2579a631e762/e542667a-3477-4ccf-b6a0-e13477cebcba_1496701242.jpeg?h=540&w=540",
+          254878545: "https://digitalcontent.api.tesco.com/v2/media/ghs/ffa35d94-1915-4b99-82e4-35f56b1b4abe/e5411b90-bba1-476f-8df9-d6010e1a04e5_418258150.jpeg?h=540&w=540"
         };
 
         const data = await element
