@@ -103,6 +103,7 @@ async function getElements(elements) {
         if (notStocked > -1) {
             delete dataBlocks //[4] = "currently out of stock";
         }
+        if(dataBlocks){
         const name = dataBlocks[0];
         const id = prodNumbers[name];
         const price = dataBlocks[4].substring(1);
@@ -110,7 +111,7 @@ async function getElements(elements) {
         const siteLink = `https://www.tesco.com/groceries/en-GB/products/${id}}`;
         const pictureLink = prodImg[id];
 
-        if(dataBlocks){
+        if(/^£/.test(price)) {
         elementDetails.push({
           name: name ?? "",
           description: description ?? "",
@@ -123,6 +124,7 @@ async function getElements(elements) {
           category: "milk",
           supermarket: "tesco",
         });
+        }
         }
       }
       count++;
