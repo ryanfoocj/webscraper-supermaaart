@@ -85,6 +85,12 @@ async function getElements(elements) {
             dataBlocks.splice(delivery, 1);
           }
         }
+        if (dataBlocks.indexOf("helf")) {
+            const delivery = dataBlocks.indexOf("helf");
+            if (delivery > -1) {
+              dataBlocks.splice(delivery, 1);
+            }
+          }
         if (dataBlocks.indexOf("Low Everyday Price")) {
           const delivery = dataBlocks.indexOf("Low Everyday Price");
           if (delivery > -1) {

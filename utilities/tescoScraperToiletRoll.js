@@ -111,6 +111,13 @@ async function getElements(elements) {
             }
           }
 
+          if (dataBlocks.indexOf("£2.80 clubcard price")) {
+            const delivery = dataBlocks.indexOf("Clubcard Price");
+            if (delivery > -1) {
+              dataBlocks.splice(delivery, 1);
+            }
+          }
+
         const notStocked = dataBlocks.indexOf(
           "This product's currently out of stock"
         );
